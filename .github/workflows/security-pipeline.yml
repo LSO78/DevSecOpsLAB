@@ -36,7 +36,7 @@ jobs:
         run: pip install bandit
 
       - name: run Bandit
-        run: bandit -r . -f txt || true
+        run: bandit -r . -f txt
   
   # scan les dépendances du projet
   safety:
@@ -55,4 +55,4 @@ jobs:
         run: pip install safety
 
       - name: run Safety
-        run: safety scan -r requirements.txt || true
+        run: safety scan -r requirements.txt
