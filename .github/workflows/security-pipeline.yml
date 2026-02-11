@@ -55,4 +55,4 @@ jobs:
         run: pip install safety
 
       - name: run Safety
-        run: safety scan -r requirements.txt
+        run: safety check -r requirements.txt
