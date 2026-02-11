@@ -1,0 +1,58 @@
+name: Pipeline sécurisée
+
+on: [pull_request, push, workflow_dispatch]
+
+jobs:
+  # scan la présence de secret dans le code
+  gitleaks:
+    name: Gitleaks - détection de secrets
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout du code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: run
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # analyse statique du code python
+  bandit:
+    name: Bandit - analyse statique du code
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkoutdu code
+        uses: actions/checkout@v4
+
+      - name: setup env python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: installation de Bandit
+        run: pip install bandit
+
+      - name: run Bandit
+        run: bandit -r . -f txt || true
+  
+  # scan les dépendances du projet
+  safety:
+    name: Safety - scan des dépendances
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout du code
+        uses: actions/checkout@v4
+      
+      - name: setup env python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: installation de Safety
+        run: pip install safety
+
+      - name: run Safety
+        run: safety check -r requirements.txt || true
