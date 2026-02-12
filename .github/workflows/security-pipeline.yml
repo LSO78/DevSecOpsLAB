@@ -74,4 +74,4 @@ jobs:
         run: pip install semgrep
 
       - name: run semgrep
-        run: semgrep --config semgrep-rules.yaml .
+        run: semgrep --config semgrep-rules.yaml . --error
