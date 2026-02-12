@@ -1,0 +1,33 @@
+rules:
+
+  - id: SHA1-detection
+    message: "Utilisation de SHA1 détecté, algorithme faible"
+    severity: WARNING
+    languages: 
+      - python
+    patterns:
+      - pattern-either:
+        - pattern: SHA1
+        - pattern: SHA1.new
+        - pattern: from Crypto.Hash import SHA1
+
+  - id: MD5-detection
+    message: "Utilisation de MD5 détecté, algorithme faible"
+    severity: WARNING
+    languages: 
+      - python
+    pattern: MD5
+
+  - id: salt-detection
+    message: "Salt hardcodé détecté"
+    severity: WARNING
+    languages: 
+      - python
+    pattern: salt=b'...'
+
+  - id: iv-detection
+    message: "IV hardcodé détecté"
+    severity: WARNING
+    languages: 
+      - python
+    pattern: iv=b'...'

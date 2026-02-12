@@ -56,3 +56,22 @@ jobs:
 
       - name: run Safety
         run: safety check -r requirements.txt
+
+  # règles personnalisées adaptées aux projets
+  semgrep:
+    name: Semgrep - règles personnalisées 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout du code
+        uses: actions/checkout@v4
+
+      - name: setup env python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: installation de Semgrep
+        run: pip install semgrep
+
+      - name: run semgrep
+        run: semgrep --config semgrep-rules.yaml .

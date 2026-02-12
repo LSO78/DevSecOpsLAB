@@ -28,12 +28,6 @@ def check_arguments(password: str, file_in: str, file_out: str):
 def kdf(password: str, salt: bytes, key_length: int) -> bytes :
     return scrypt(password.encode(), salt, key_length, N=2**14, r=8, p=1)
 
-def get_salt() -> bytes :
-    return b'\x4d\xd4\x03\x73\x9d\x64\xfc\x71' 
-
-def get_iv() -> bytes :
-    return b'\xd8\x58\x9c\x27\x91\xcc\x25\x8d\x91\x27\xc1\xa9\xd2\x9e\x5b\xb9'
-
 def kc_generator(km: bytes) -> bytes :
     ho = SHA256.new()
     ho.update(km)
@@ -83,11 +77,11 @@ def protect_file(password: str, file_in: str, file_out: str) :
     except Exception as e:
         print(e)
         sys.exit(1)
-    salt = get_salt()
+    salt = b'\x4d\xd4\x03\x73\x9d\x64\xfc\x71'
     km = kdf(password, salt, 32)
     ki = ki_generator(km)
     kc = kc_generator(km)
-    iv = get_iv()
+    iv = b'\xd8\x58\x9c\x27\x91\xcc\x25\x8d\x91\x27\xc1\xa9\xd2\x9e\x5b\xb9'
     optimized_protect(kc, ki, iv, file_in, file_out, salt)
     print(f"Fichier chiffré avec succès -> {file_out}")
 
