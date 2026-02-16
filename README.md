@@ -26,7 +26,7 @@ La pipeline CI/CD intègre 4 outils d'analyse de sécurité :
 
 | Outil    | Type           | Rôle                              |
 | -------- | -------------- | --------------------------------- |
-| Gitleaks | Secret scanner | Détecte les secrets hardcodé      |
+| Gitleaks | Secret scanner | Détecte les secrets hardcodés      |
 | Bandit   | SAST (Python)  | Analyse statique du code Python   |
 | Safety   | SCA            | Analyse des dépendances du projet |
 ### Résultats attendus
@@ -38,7 +38,7 @@ La pipeline CI/CD intègre 4 outils d'analyse de sécurité :
 | Safety   | Détecte `CVE-2013-7459` dans `pyCrypto`                                     |
 ### Résultats obtenus
 
-| Outil    | Résultat attendu                                                            |
+| Outil    | Résultat obtenu                                                             |
 | -------- | --------------------------------------------------------------------------- |
 | Gitleaks | Ne détecte pas le `password = "chiffrementsymetrique"`                      |
 | Bandit   | Détecte le `password = "chiffrementsymetrique"` + utilisation de `pyCrypto` |
@@ -98,3 +98,4 @@ DevSecOpsLAB/
 ├── semgrep-rules.yaml              # Règles Semgrep personnalisées
 └── README.md
 ```
+
