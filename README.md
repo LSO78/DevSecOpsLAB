@@ -22,7 +22,7 @@ Pour tester les capacités de détection des outils de sécurité, plusieurs vul
 | utilisation de `pyCrypto` | Librairie dépréciée depuis 2014      | `CVE-2013-7459`                                                      |
 # La pipeline CI/CD
 ## Les outils
-La pipeline CI/CD intègre 4 outils d'analyse de sécurité :
+La pipeline CI/CD intègre 3 outils d'analyse de sécurité :
 
 | Outil    | Type           | Rôle                              |
 | -------- | -------------- | --------------------------------- |
